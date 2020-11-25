@@ -130,6 +130,14 @@ model = lgb.train(
     early_stopping_rounds=10
 )
 
+df_features_import = pd.DataFrame()
+df_features_import['columns_features'] = columns_features
+df_features_import['feature_importance'] = model.feature_importance()
+#prior_question_elapsed_time 最重要可以分桶
+train['prior_question_elapsed_time'].hist(bins=200) #有偏 做log处理 按分位点等同划分分桶
+train['prior_question_elapsed_time'].map(lambda x:np.log(1+x)).hist(bins=200)
+
+# 接下来提高用stacking做   提特征 找模型 看特征重要性
 
 y_pred = model.predict(X_val)
 y_true = np.array(y_val)

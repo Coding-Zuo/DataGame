@@ -103,7 +103,7 @@ def get_lecture_basic_features__user(train_lectures_info):
     gb_suffixes = 'lecture_'+'_'.join(gb_columns)
     
     agg_func = {
-        'lecture_id': [np.size],
+        'lecture_id': [np.size ,np.sum],
         'task_container_id': [lambda x: len(set(x))],
         'tag': [lambda x: len(set(x))],
 
@@ -115,6 +115,7 @@ def get_lecture_basic_features__user(train_lectures_info):
     }
     columns = [
            gb_suffixes+'_size_lecture_id', 
+           gb_suffixes+'_sum_lecture_id', 
            gb_suffixes+'_unique_task_container_id',
            gb_suffixes+'_unique_tag',
            gb_suffixes+'_unique_part',
